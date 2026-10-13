@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#2d323e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Orbit // Secure Tactical Chat</title>
+    <link rel="stylesheet" href="Orbit.css">
+</head>
+<body>
+
+    <div class="app-viewport">
+
+        <!-- SCREEN 1: SESSION AUTHENTICATION -->
+        <div id="authScreen" class="screen active">
+            <div class="auth-card">
+                <div class="auth-brand">
+                    <svg class="auth-sigil" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <circle cx="24" cy="24" r="20" stroke="#94a3b8" stroke-width="2" opacity="0.35"/>
+                        <ellipse cx="24" cy="24" rx="20" ry="8" stroke="#f8fafc" stroke-width="2"/>
+                        <circle cx="40" cy="18" r="4" fill="#1e40af"/>
+                    </svg>
+                    <h2>ORBIT</h2>
+                </div>
+                <p>Enter your 4-digit clearance code to initialize the secure relay session.</p>
+
+                <input type="password" id="pinInput" maxlength="4" inputmode="numeric" autocomplete="off" placeholder="••••" aria-label="Access PIN">
+
+                <div id="authError" class="auth-error" role="alert"></div>
+
+                <button class="action-btn primary-btn" onclick="checkAuth()">Authenticate</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: TACTICAL CHAT NETWORK -->
+        <div id="chatScreen" class="screen">
+            <header class="chat-header">
+                <div class="identity-group">
+                    <span id="userBadge" class="badge">--</span>
+                    <h3>ORBIT RELAY</h3>
+                    <div class="status-row">
+                        <span id="statusIndicator" class="status-dot"></span>
+                        <span id="statusText" class="status-text">Offline</span>
+                    </div>
+                </div>
+                <button id="connectBtn" class="link-btn" onclick="connectBluetooth()">Link Arduino Device</button>
+            </header>
+
+            <main id="chatBox" class="chat-feed">
+                <div class="bubble system">Secure runtime environment loaded.</div>
+            </main>
+
+            <footer class="chat-footer">
+                <div class="text-field-container">
+                    <input type="text" id="msgInput" placeholder="Compose transmission..." autocomplete="off" onkeydown="if(event.key === 'Enter'){ event.preventDefault(); sendData(); }">
+                    <button id="sendBtn" class="submit-arrow" onclick="sendData()" aria-label="Send transmission">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M3.4 20.4l17.45-7.48a1 1 0 000-1.84L3.4 3.6a.993.993 0 00-1.39.91L2 9.12c0 .5.37.93.87.99L17 12 2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z" fill="currentColor"/>
+                        </svg>
+                    </button>
+                </div>
+            </footer>
+        </div>
+
+    </div>
+
+    <script src="Orbit.js"></script>
+</body>
+</html>
